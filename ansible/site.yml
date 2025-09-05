@@ -1,0 +1,13 @@
+- name: Bootstrap Ubuntu server and deploy app
+  hosts: all
+  become: yes
+  vars:
+    sudo_user: deploy
+    app_name: sample_app
+    app_image: nginx:latest
+  roles:
+    - user
+    - packages
+    - docker
+    - app
+    - logging

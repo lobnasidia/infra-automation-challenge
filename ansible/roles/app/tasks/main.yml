@@ -1,0 +1,8 @@
+- name: Pull and run container
+  community.docker.docker_container:
+    name: "{{ app_name }}"
+    image: "{{ app_image }}"
+    state: started
+    restart_policy: always
+    published_ports:
+      - "80:80"

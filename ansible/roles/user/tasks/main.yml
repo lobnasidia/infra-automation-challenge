@@ -1,0 +1,12 @@
+- name: Create deploy user
+  ansible.builtin.user:
+    name: "{{ sudo_user }}"
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+    state: present
+
+- name: Ensure authorized key is present
+  ansible.builtin.authorized_key:
+    user: "{{ sudo_user }}"
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"

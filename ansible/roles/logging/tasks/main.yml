@@ -1,0 +1,21 @@
+- name: Ensure log directory exists
+  ansible.builtin.file:
+    path: /var/log/sample_app
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Configure log rotation for the app
+  ansible.builtin.copy:
+    dest: /etc/logrotate.d/sample_app
+    content: |
+      /var/log/sample_app/*.log {
+          daily
+          missingok
+          rotate 14
+          compress
+          delaycompress
+          notifempty
+          create 0640 root root
+      }
